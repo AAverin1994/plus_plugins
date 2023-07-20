@@ -137,6 +137,7 @@ TopViewControllerForViewController(UIViewController *viewController) {
     _mimeType = mimeType;
     _subject = [subject isKindOfClass:NSNull.class] ? @"" : subject;
   }
+
   return self;
 }
 
@@ -460,26 +461,26 @@ TopViewControllerForViewController(UIViewController *viewController) {
           atSource:(CGRect)origin
           toResult:(FlutterResult)result
         withResult:(BOOL)withResult {
-  NSMutableArray *items = [[NSMutableArray alloc] init];
+    NSMutableArray *items = [[NSMutableArray alloc] init];
 
-  for (int i = 0; i < [paths count]; i++) {
-    NSString *path = paths[i];
-    NSString *mimeType = mimeTypes[i];
-    [items addObject:[[SharePlusData alloc] initWithFile:path
-                                                mimeType:mimeType
-                                                 subject:subject]];
-  }
-  if (text != nil) {
-    NSObject *data = [[SharePlusData alloc] initWithSubject:subject text:text];
-    [items addObject:data];
-  }
+    for (int i = 0; i < [paths count]; i++) {
+        NSString *path = paths[i];
+        NSURL *urlPath = [[NSURL alloc] initFileURLWithPath:path];
+        [items addObject:urlPath];
+    }
 
-  [self share:items
-         withSubject:subject
-      withController:controller
-            atSource:origin
-            toResult:result
-          withResult:withResult];
+    if (text != nil) {
+        NSObject *data = [[SharePlusData alloc] initWithSubject:subject text:text];
+        [items addObject:data];
+    }
+
+    [self share:items
+    withSubject:subject
+ withController:controller
+       atSource:origin
+       toResult:result
+     withResult:withResult
+    ];
 }
 
 @end
