@@ -32,7 +32,11 @@ dependencies:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
-  share_plus_platform_interface: ^3.2.1
+  share_plus_platform_interface:
+    git:
+      url: https://AAverin1994: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@github.com/AAverin1994/plus_plugins.git
+      ref: fix_iOS_share_format_issue
+      path: packages/share_plus/share_plus_platform_interface
   file: ">=6.1.4 <8.0.0"
   url_launcher_web: ^2.0.16
   url_launcher_windows: ^3.0.6
